@@ -34,7 +34,6 @@ const getRow = async (email) => {
 
 const addRow = async (rows) => {
 
-    // use service account creds
     await doc.useServiceAccountAuth({
         client_email: CREDENTIALS.client_email,
         private_key: CREDENTIALS.private_key
@@ -42,7 +41,6 @@ const addRow = async (rows) => {
 
     await doc.loadInfo();
 
-    // Index of the sheet
     let sheet = doc.sheetsByIndex[0];
 
     for (let index = 0; index < rows.length; index++) {
