@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .timer-output {
+    font-size: 10rem;
+    margin-bottom: 20px;
+    background: darkseagreen;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .buttons {
+    text-align: center;
+  }
+  .buttons button {
+    margin: 0 2em;
+    cursor: pointer;
+  }
+  
+  label,
+  textarea {
+      font-size: .8rem;
+      letter-spacing: 1px;
+  }
+  textarea {
+      padding: 10px;
+      max-width: 100%;
+      line-height: 1.5;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-shadow: 1px 1px 1px #999;
+  }
+  
+  label {
+      display: block;
+      margin-bottom: 10px;
+      margin-top: 10px;
+  }
+  
