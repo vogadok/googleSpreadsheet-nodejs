@@ -8,6 +8,12 @@ const port = 5000
 
 const app = express();
 
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+extended: true
+})); 
+
 app.use(express.static('public'));
 app.use('/js', express.static(__dirname + 'public/js'));
 
@@ -21,11 +27,19 @@ app.get('', (req, res) => {
     res.render('home', {text : 'this is a test'});
 });
 //ao enviar os dados no submit ele carrega essa que basicamente renderiza a pagina home
-app.post('/getRow', (req, res) => {
-    res.render('home', {text : 'this is a test'});
+app.post('/addRow', (req, res) => {
+    addRow(createRow(req.body.email, req.body.projeto, req.body.descricao));
 
-    getRow('lucasbaierle@gmail.com');
+    //TODO, description no needed
+    let err = false;
+    if (err) {
+        res.render('error', {success: true});
+    } else {
+        res.render('success', {success: true});
+    }
 });
+
+const createRow = (email, projeto, descricao) => ([{email: email, projeto: projeto, descricao: descricao}]);
 
 //funcao para buscar dados da planilha
 const getRow = async (email) => {
@@ -68,16 +82,6 @@ const addRow = async (rows) => {
         await sheet.addRow(row);
     }
 };
-
-let rows = [{
-    email: 'email@email.com',
-    user_name: 'ramesh',
-    password: 'abcd@1234'
-}, {
-    email: 'email@gmail.com',
-    user_name: 'dilip',
-    password: 'abcd@1234'
-}];
 
 //addRow(rows);
 
