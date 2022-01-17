@@ -4,29 +4,29 @@ const RESPONSES_SHEET_ID = '1jnb2wjF4dYHFDkvEwL53HeXiXPLa90bkiJ_xhXC1un0';
 const doc = new GoogleSpreadsheet(RESPONSES_SHEET_ID);
 const CREDENTIALS = JSON.parse(fs.readFileSync('public/credentials.json'));
 const express = require('express');
-const port = 5000
+const port = 3000
 
 const app = express();
 
-var bodyParser = require('body-parser')
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-extended: true
-})); 
+// var bodyParser = require('body-parser')
+// app.use( bodyParser.json() );       // to support JSON-encoded bodies
+// app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+// extended: true
+// })); 
 
 app.use(express.static('public'));
-app.use('/js', express.static(__dirname + 'public/js'));
+//app.use(express.static(path.join('./public', 'script')));
 
-app.set('views', './views');
+app.set('views', 'views');
 app.set('view engine', 'ejs');
-// start the express web server listening on 8080
+// start the express web server listening on 8080s
 app.listen(port, () => console.info(`App listening on port ${port}`));
 
 //de primeira ele roda essa pagina pra mostrar o form
 app.get('', (req, res) => {
+    //res.sendFile(__dirname + '/index.html');
     res.render('home', {text : 'this is a test'});
 });
-//ao enviar os dados no submit ele carrega essa que basicamente renderiza a pagina home
 app.post('/addRow', (req, res) => {
     addRow(createRow(req.body.email, req.body.projeto, req.body.descricao));
 
